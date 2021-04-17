@@ -1,0 +1,6 @@
+#login{
+    display:inline-block;
+}
+#login > input{
+    width: 100%;
+}

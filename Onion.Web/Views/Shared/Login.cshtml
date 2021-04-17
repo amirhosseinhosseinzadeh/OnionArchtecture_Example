@@ -1,0 +1,30 @@
+@model LoginModel
+
+@{
+    var returnUrl = ViewData["returnUrl"] as string;
+}
+<span>
+    @returnUrl
+</span>
+<div class="row">
+    <div id="login-tab">
+        <form asp-route="/login" method="post">
+            <div class="form-group">
+                <div class="form-control">
+                    <label asp-for="@Model.EmailOrUserName"></label>
+                    <input asp-for="@Model.EmailOrUserName" />
+                </div>
+                <div class="form-control">
+                    <label asp-for="@Model.Password"></label>
+                    <input asp-for="@Model.Password" />
+                </div>
+                <div class="form-control">
+                    <label asp-for="@Model.RmemberMe"></label>
+                    <input asp-for="@Model.RmemberMe" />
+                </div>
+                <input type="submit" class="btn btn-primary" />
+            </div>
+            <input type="hidden" name="returnUrl" value="@returnUrl" />
+        </form>
+    </div>
+</div> 
