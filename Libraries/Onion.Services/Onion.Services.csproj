@@ -12,4 +12,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Onion.Domain\Onion.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

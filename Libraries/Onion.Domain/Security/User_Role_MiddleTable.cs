@@ -1,6 +1,6 @@
-﻿using Onion.Libraries.Domain.Bases;
+﻿using Onion.Domain.Bases;
+using Onion.Domain.Users;
 using Onion.Libraries.Domain.Security;
-using Onion.Libraries.Domain.Users;
 
 namespace Onion.Domain.Security
 {

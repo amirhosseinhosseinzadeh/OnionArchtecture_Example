@@ -1,6 +1,6 @@
 using System;
 
-namespace Onion.Libraries.Domain.Bases
+namespace Onion.Domain.Bases
 {
     public class BaseEntity
     {

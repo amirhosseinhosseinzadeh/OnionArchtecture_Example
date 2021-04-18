@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Onion.Libraries.Domain.Users;
+using Onion.Domain.Users;
 
 namespace Onion.Data.Mappings
 {

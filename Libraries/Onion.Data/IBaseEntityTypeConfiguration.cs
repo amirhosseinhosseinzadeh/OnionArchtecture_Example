@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Onion.Libraries.Domain.Bases;
+using Onion.Domain.Bases;
 
 namespace Onion.Data
 {

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Onion.Data.Mappings;
 using Onion.Domain.Security;
+using Onion.Domain.Users;
 using Onion.Libraries.Domain.Security;
-using Onion.Libraries.Domain.Users;
 
 namespace Onnion.Data
 {

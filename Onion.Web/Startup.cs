@@ -6,9 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Onion.Web.Infrastructures.Extensions;
 using Onion.Services.Security;
-using Onion.Services.User;
 using Microsoft.EntityFrameworkCore;
 using Onnion.Data;
+using Onion.Services.Users;
+using Onion.Data.Infrastructures;
 
 namespace Onion.Web
 {
@@ -35,11 +36,14 @@ namespace Onion.Web
             //Application Services
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IUserService, UserService>();
-        }
+
+            // Check this section for not throwing exception
+	    // services.AddScoped<typeof(IRepository<>), typeof(Repository<>)>();
+       }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
+	{
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
