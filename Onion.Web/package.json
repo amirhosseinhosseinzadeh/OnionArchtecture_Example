@@ -3,6 +3,7 @@
   "name": "asp.net",
   "private": true,
   "devDependencies": {
-    "jquery-validation": "1.13.1"
+    "jquery-validation": "1.13.1",
+    "react": "17.0.2"
   }
 }

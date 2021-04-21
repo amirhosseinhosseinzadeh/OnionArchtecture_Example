@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Onion.Data.Infrastructures
 {
-    public class Repository<T> : IRepositiry<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         #region Fields
 
@@ -20,9 +20,9 @@ namespace Onion.Data.Infrastructures
 
         #region Ctor
 
-        public Repository(ObjectContext objectContext)
+        public Repository(ObjectContext context)
         {
-            this._context = objectContext;
+            this._context = context;
         }
 
         #endregion
@@ -74,7 +74,7 @@ namespace Onion.Data.Infrastructures
 
         #region Methods
 
-        public virtual async Task Delete(T entity)
+        public virtual async Task DeleteAsync(T entity)
         {
             CheckForValue(entity);
 
@@ -89,13 +89,13 @@ namespace Onion.Data.Infrastructures
             }
         }
 
-        public virtual async Task Delete(int id)
+        public virtual async Task DeleteAsync(int id)
         {
             CheckForValue(id);
 
             try
             {
-                var entity = await GetById(id);
+                var entity = await GetByIdAsync(id);
                 Entities.Remove(entity);
                 await _context.SaveChangesAsync();
             }
@@ -105,14 +105,14 @@ namespace Onion.Data.Infrastructures
             }
         }
 
-        public virtual async Task<T> GetById(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
             CheckForValue(id);
 
             return await Entities.FindAsync(id);
         }
 
-        public virtual async Task Insert(T entity)
+        public virtual async Task InsertAsync(T entity)
         {
             CheckForValue(entity);
 
@@ -127,7 +127,7 @@ namespace Onion.Data.Infrastructures
             }
         }
 
-        public virtual async Task UpdateEntity(T entity)
+        public virtual async Task UpdateEntityAsync(T entity)
         {
             CheckForValue(entity);
 
@@ -142,7 +142,7 @@ namespace Onion.Data.Infrastructures
             }
         }
 
-        public virtual async Task InsertMany(IList<T> entities)
+        public virtual async Task InsertManyAsync(IList<T> entities)
         {
             CheckForValue(entities);
 
@@ -157,7 +157,7 @@ namespace Onion.Data.Infrastructures
             }
         }
 
-        public virtual async Task DeleteMany(IList<T> entities)
+        public virtual async Task DeleteManyAsync(IList<T> entities)
         {
             CheckForValue(entities);
 
@@ -172,7 +172,7 @@ namespace Onion.Data.Infrastructures
             }
         }
 
-        public virtual async Task DeleteMany(IList<int> ids)
+        public virtual async Task DeleteManyAsync(IList<int> ids)
         {
             CheckForValue(ids);
 
@@ -180,10 +180,10 @@ namespace Onion.Data.Infrastructures
             {
                 foreach (var id in ids)
                 {
-                    var entity = await GetById(id);
+                    var entity = await GetByIdAsync(id);
 
                     if (entity != null)
-                        await Delete(entity);
+                        await DeleteAsync(entity);
                 }
                 await _context.SaveChangesAsync();
             }
@@ -193,7 +193,7 @@ namespace Onion.Data.Infrastructures
             }
         }
 
-        public virtual async Task UpdateMany(IList<T> entities)
+        public virtual async Task UpdateManyAsync(IList<T> entities)
         {
             CheckForValue(entities);
             try

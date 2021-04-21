@@ -12,6 +12,11 @@ namespace Onion.Libraries.Domain.Security
             this._user_Role_MiddleTables = new List<User_Role_MiddleTable>();
         }
 
+        public Role(string roleName)
+        {
+            this.RoleName = roleName;
+        }
+
         private ICollection<User_Role_MiddleTable> _user_Role_MiddleTables;
 
         public string RoleName { get; set; }

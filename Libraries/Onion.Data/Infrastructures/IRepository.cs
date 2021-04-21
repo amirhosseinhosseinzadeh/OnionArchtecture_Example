@@ -5,25 +5,25 @@ using System.Threading.Tasks;
 
 namespace Onion.Data.Infrastructures
 {
-    public interface IRepositiry<TEntity> where TEntity : BaseEntity
+    public interface IRepository<TEntity> where TEntity : BaseEntity
     {
-        Task Insert(TEntity entity);
+        Task InsertAsync(TEntity entity);
 
-        Task<TEntity> GetById(int id);
+        Task<TEntity> GetByIdAsync(int id);
 
-        Task UpdateEntity(TEntity entity);
+        Task UpdateEntityAsync(TEntity entity);
 
-        Task Delete(TEntity entity);
+        Task DeleteAsync(TEntity entity);
 
-        Task Delete(int id);
+        Task DeleteAsync(int id);
 
-        Task InsertMany(IList<TEntity> entities);
+        Task InsertManyAsync(IList<TEntity> entities);
 
-        Task DeleteMany(IList<TEntity> entities);
+        Task DeleteManyAsync(IList<TEntity> entities);
 
-        Task DeleteMany(IList<int> ids);
+        Task DeleteManyAsync(IList<int> ids);
 
-        Task UpdateMany(IList<TEntity> entities);
+        Task UpdateManyAsync(IList<TEntity> entities);
 
         IQueryable<TEntity> Table { get; }
 

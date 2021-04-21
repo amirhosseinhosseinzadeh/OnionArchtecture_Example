@@ -12,16 +12,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Libraries\Onion.Services\Onion.Services.csproj" />
-    <ProjectReference Include="..\Libraries\Onion.Data\Onion.Data.csproj" />
-    <ProjectReference Include="..\Libraries\Onion.Domain\Onion.Domain.csproj" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Views\Bases\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\Onion.Data\Onion.Data.csproj" />
+    <ProjectReference Include="..\Libraries\Onion.Domain\Onion.Domain.csproj" />
+    <ProjectReference Include="..\Libraries\Onion.Services\Onion.Services.csproj" />
   </ItemGroup>
 
 </Project>

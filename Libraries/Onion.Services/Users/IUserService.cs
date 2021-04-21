@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using Onion.Domain.Users;
+using System.Threading.Tasks;
 
 namespace Onion.Services.Users
 {
@@ -7,6 +8,8 @@ namespace Onion.Services.Users
     {
         bool IsUserLoggedIn(ClaimsPrincipal user);
 
-        void CreateNewUser(User user);
+        Task CreateNewUser(User user);
+
+
     }
 }

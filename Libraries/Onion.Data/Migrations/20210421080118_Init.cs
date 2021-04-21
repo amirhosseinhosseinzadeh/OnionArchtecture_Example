@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Onion.Data.Migrations
 {
-    public partial class Add_Role_User_UserRoleMiddleTable_Tables : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,8 @@ namespace Onion.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LastModifiedOnUtc = table.Column<DateTime>(nullable: false),
-                    LastModifierId = table.Column<int>(nullable: false),
-                    ISUpdated = table.Column<bool>(nullable: false),
+                    LastModifierId = table.Column<string>(nullable: true),
+                    IsUpdated = table.Column<bool>(nullable: false),
                     RoleName = table.Column<string>(maxLength: 250, nullable: false)
                 },
                 constraints: table =>
@@ -30,8 +30,8 @@ namespace Onion.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LastModifiedOnUtc = table.Column<DateTime>(nullable: false),
-                    LastModifierId = table.Column<int>(nullable: false),
-                    ISUpdated = table.Column<bool>(nullable: false),
+                    LastModifierId = table.Column<string>(nullable: true),
+                    IsUpdated = table.Column<bool>(nullable: false),
                     UserName = table.Column<string>(nullable: false),
                     EmailAddress = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<long>(nullable: false)
@@ -48,8 +48,8 @@ namespace Onion.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LastModifiedOnUtc = table.Column<DateTime>(nullable: false),
-                    LastModifierId = table.Column<int>(nullable: false),
-                    ISUpdated = table.Column<bool>(nullable: false),
+                    LastModifierId = table.Column<string>(nullable: true),
+                    IsUpdated = table.Column<bool>(nullable: false),
                     CustomerId = table.Column<int>(nullable: false),
                     RoleId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false)

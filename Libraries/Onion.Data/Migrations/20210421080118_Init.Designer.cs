@@ -10,8 +10,8 @@ using Onnion.Data;
 namespace Onion.Data.Migrations
 {
     [DbContext(typeof(ObjectContext))]
-    [Migration("20210417152137_Add_Role_User_UserRoleMiddleTable_Tables")]
-    partial class Add_Role_User_UserRoleMiddleTable_Tables
+    [Migration("20210421080118_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,14 +31,14 @@ namespace Onion.Data.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("ISUpdated")
+                    b.Property<bool>("IsUpdated")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastModifiedOnUtc")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LastModifierId")
-                        .HasColumnType("int");
+                    b.Property<string>("LastModifierId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -55,33 +55,7 @@ namespace Onion.Data.Migrations
                     b.ToTable("User_Role_MiddleTable");
                 });
 
-            modelBuilder.Entity("Onion.Libraries.Domain.Security.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("ISUpdated")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("LastModifiedOnUtc")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("LastModifierId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("Onion.Libraries.Domain.Users.User", b =>
+            modelBuilder.Entity("Onion.Domain.Users.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,14 +66,14 @@ namespace Onion.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("ISUpdated")
+                    b.Property<bool>("IsUpdated")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastModifiedOnUtc")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LastModifierId")
-                        .HasColumnType("int");
+                    b.Property<string>("LastModifierId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("PhoneNumber")
                         .HasColumnType("bigint");
@@ -113,6 +87,32 @@ namespace Onion.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Onion.Libraries.Domain.Security.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsUpdated")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastModifiedOnUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifierId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(250)")
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("Onion.Domain.Security.User_Role_MiddleTable", b =>
                 {
                     b.HasOne("Onion.Libraries.Domain.Security.Role", "Role")
@@ -121,7 +121,7 @@ namespace Onion.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Onion.Libraries.Domain.Users.User", "User")
+                    b.HasOne("Onion.Domain.Users.User", "User")
                         .WithMany("User_Role_MiddleTable")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

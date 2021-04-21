@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Onion.Services.Security;
-using Onion.Services.User;
+using Onion.Services.Users;
 using Onion.Web.Infrastructures.Extensions;
 using Onion.Web.Models;
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Onion.Web.Controllers.Bases

@@ -1,0 +1,82 @@
+@model UserModel
+
+@{
+    ViewData["Title"] = "Add new user";
+}
+
+<div class="row">
+    <form asp-action="CreateUser" asp-controller="Home" method="post">
+        <div class="form-group">
+            <div class="form-control">
+                <div class="col-md-3">
+                    <label asp-for="@Model.UserName"></label>
+                </div>
+                <div class="col-md-5">
+                    <input asp-for="@Model.UserName" />
+                    <span asp-validation-for="@Model.UserName"></span>
+                </div>
+            </div>
+            <div class="form-control">
+                <div class="col-md-3">
+                    <label asp-for="@Model.Email"></label>
+                </div>
+                <div class="col-md-5">
+                    <input asp-for="@Model.Email" />
+                    <span asp-validation-for="@Model.Email"></span>
+                </div>
+            </div>
+            <div class="form-control">
+                <div class="col-md-3">
+                    <label asp-for="@Model.Password"></label>
+                </div>
+                <div class="col-md-5">
+                    <input class="pass" asp-for="@Model.Password" />
+                    <span asp-validation-for="@Model.Password"></span>
+                </div>
+            </div>
+            <div class="form-control">
+                <div class="col-md-3">
+                    <label asp-for="@Model.RepeatPassword"></label>
+                </div>
+                <div class="col-md-5">
+                    <input class="re-pass" asp-for="@Model.RepeatPassword" />
+                    <span class="re-pass-error" asp-validation-for="@Model.RepeatPassword"></span>
+                </div>
+            </div>
+            <div class="form-control">
+                <div class="col-md-3">
+                    <label asp-for="@Model.PhoneNumber"></label>
+                </div>
+                <div class="col-md-5">
+                    <input asp-for="@Model.PhoneNumber" />
+                    <span asp-validation-for="@Model.PhoneNumber"></span>
+                </div>
+            </div>
+            <div class="form-control">
+                <div class="col-md-3">
+                    <label asp-for="@Model.AvailableRoles"></label>
+                </div>
+                <div class="col-md-5">
+                    @Html.DropDownList("Available roles", Model.AvailableRoles)
+                    <span asp-validation-for="@Model.AvailableRoles"></span>
+                </div>
+            </div>
+            <div class="form-control">
+                <input type="submit" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(".re-pass","pass").change(function () {
+        let password = $(".pass").val();
+        let repass = $(".re-pass").val();
+
+        if (password !== repass) {
+            var errlbl = $(".re-pass-error");
+            errlbl.css("color", "red");
+            errlbl.text("The password retype is not equal to password");
+        }
+    })
+</script>

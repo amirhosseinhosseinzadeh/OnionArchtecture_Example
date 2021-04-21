@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Onnion.Data;
 using Onion.Services.Users;
 using Onion.Data.Infrastructures;
+using Microsoft.AspNetCore.Http;
 
 namespace Onion.Web
 {
@@ -36,14 +37,13 @@ namespace Onion.Web
             //Application Services
             services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<IUserService, UserService>();
-
-            // Check this section for not throwing exception
-	    // services.AddScoped<typeof(IRepository<>), typeof(Repository<>)>();
-       }
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-	{
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -58,6 +58,7 @@ namespace Onion.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+            
             app.UseAuthentication();
             app.UseAuthorization();
 
