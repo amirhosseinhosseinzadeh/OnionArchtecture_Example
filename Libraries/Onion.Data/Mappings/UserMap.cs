@@ -13,6 +13,8 @@ namespace Onion.Data.Mappings
 
             builder.Property(nameof(User.UserName)).IsRequired();
             builder.Property(nameof(User.EmailAddress)).IsRequired();
+            builder.Property(nameof(User.Password)).IsRequired();
+            builder.Property(nameof(User.Key)).HasMaxLength(5);
         }
     }
 }

@@ -19,6 +19,10 @@ namespace Onion.Domain.Users
 
         public long PhoneNumber { get; set; }
 
+        public string Password { get; set; }
+
+        public string Key { get; set; }
+
         public virtual ICollection<User_Role_MiddleTable> User_Role_MiddleTable
         {
             get => _user_Role_MiddleTables ?? (_user_Role_MiddleTables = new List<User_Role_MiddleTable>());

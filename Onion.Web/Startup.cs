@@ -16,12 +16,15 @@ namespace Onion.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration,IHttpContextAccessor httpContextAccessor)
         {
             Configuration = configuration;
+            this._httpContextAccessor = httpContextAccessor;
         }
 
         public IConfiguration Configuration { get; }
+
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -55,11 +58,13 @@ namespace Onion.Web
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
             
             app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

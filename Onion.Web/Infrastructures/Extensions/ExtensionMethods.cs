@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
 
 namespace Onion.Web.Infrastructures.Extensions

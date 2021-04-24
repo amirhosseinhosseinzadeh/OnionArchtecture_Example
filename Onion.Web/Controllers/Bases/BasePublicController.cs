@@ -4,7 +4,6 @@ using Onion.Services.Security;
 using Onion.Services.Users;
 using Onion.Web.Infrastructures.Extensions;
 using Onion.Web.Models;
-using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -47,13 +46,17 @@ namespace Onion.Web.Controllers.Bases
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginModel model, string returnUrl)
         {
-            if (!model.EmailOrUserName.Equals("test1", StringComparison.InvariantCultureIgnoreCase) &&
-                !model.Password.Equals("1", StringComparison.InvariantCultureIgnoreCase))
+            var currentUser = await _userService.GetUserByUserNameOrPasswordAsync(model.EmailOrUserName, model.Password);
+
+            if (currentUser == null)
+                ModelState.AddModelError(nameof(model.EmailOrUserName), "There is no refistered user with username or email or this password");
+
+            if (!ModelState.IsValid)
                 return RedirectToAction(nameof(Login));
 
-            var claimsPrincipal = _securityService.PrepareCookieCliamnsPrincipal(model.EmailOrUserName, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            await _securityService.LoginUserByClaimPrincipal(claimsPrincipal, HttpContext);
+            await _userService.loginUserAsync(currentUser,
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                HttpContext);
 
             if (!string.IsNullOrWhiteSpace(returnUrl))
                 return Redirect(returnUrl);

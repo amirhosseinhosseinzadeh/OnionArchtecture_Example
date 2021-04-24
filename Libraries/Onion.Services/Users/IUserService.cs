@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Onion.Domain.Users;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Onion.Services.Users
 {
@@ -10,6 +11,8 @@ namespace Onion.Services.Users
 
         Task CreateNewUser(User user);
 
+        Task<User> GetUserByUserNameOrPasswordAsync(string userNameOrEmail, string password);
 
+        Task loginUserAsync(User user, string authenticationSchem, HttpContext httpContext);
     }
 }
