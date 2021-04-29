@@ -108,7 +108,7 @@ namespace Onion.Services.Users
 
         public async Task loginUserAsync(User user, string authenticationSchem, HttpContext httpContext)
         {
-            var claimPrincipal = _securityService.PrepareCookieCliamnsPrincipal(user.UserName, authenticationSchem);
+            var claimPrincipal = _securityService.PrepareCookieCliamnsPrincipal(user.UserName, user.EmailAddress, authenticationSchem);
             await _securityService.LoginUserByClaimPrincipal(claimPrincipal, httpContext);
         }
 

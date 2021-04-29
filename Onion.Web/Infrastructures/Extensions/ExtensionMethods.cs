@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Builder;
 
 namespace Onion.Web.Infrastructures.Extensions
 {
@@ -40,6 +42,38 @@ namespace Onion.Web.Infrastructures.Extensions
                 returnUrl = returnUrl.Substring(0, len);
             }
             return returnUrl;
+        }
+
+        public static void PublishRoute(this IEndpointRouteBuilder endpointRouteBuilder,
+            string name,
+            string url,
+            string controller,
+            string action,
+            bool isAdminRoute = false
+            )
+        {
+            if (isAdminRoute)
+            {
+                endpointRouteBuilder.MapControllerRoute(name,
+                    url,
+                    new
+                    {
+                        controller,
+                        action,
+                        area = Constants.AdminArea
+                    });
+            }
+            else
+            {
+                endpointRouteBuilder.MapControllerRoute(name,
+                    controller,
+                    action,
+                    new
+                    {
+                        controller,
+                        action
+                    });
+            }
         }
     }
 }

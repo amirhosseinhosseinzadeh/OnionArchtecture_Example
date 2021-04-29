@@ -11,20 +11,21 @@ using Onnion.Data;
 using Onion.Services.Users;
 using Onion.Data.Infrastructures;
 using Microsoft.AspNetCore.Http;
+using Onion.Web.Infrastructures.Mvc;
 
 namespace Onion.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration,IHttpContextAccessor httpContextAccessor)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            this._httpContextAccessor = httpContextAccessor;
         }
 
         public IConfiguration Configuration { get; }
 
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        public IRoutePublisher RoutePublisher { get; private set; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -42,6 +43,7 @@ namespace Onion.Web
             services.AddScoped<IUserService, UserService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IRoutePublisher, RoutePublisher>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +75,13 @@ namespace Onion.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                     );
+                endpoints.MapAreaControllerRoute(
+                    name: "Admin",
+                    areaName:"Admin",
+                    pattern: "{area=Admin}/{controller=Main}/{action=Index}"
+                    );
+                this.RoutePublisher = app.ApplicationServices.GetService<IRoutePublisher>();
+                RoutePublisher.RegisterRoutes(endpoints);
             });
         }
     }
