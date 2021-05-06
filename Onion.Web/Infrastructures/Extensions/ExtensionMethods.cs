@@ -66,8 +66,7 @@ namespace Onion.Web.Infrastructures.Extensions
             else
             {
                 endpointRouteBuilder.MapControllerRoute(name,
-                    controller,
-                    action,
+                    url,
                     new
                     {
                         controller,
